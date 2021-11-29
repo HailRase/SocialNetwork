@@ -5,24 +5,25 @@ import DialogItem from "./DialogItem/DialogItem";
 import {ActionsTypes, DialogsPageType} from "../../redux/store";
 import {
     addMessageActionCreator,
-    UpdateNewMessageTextActionCreator
+    updateNewMessageTextActionCreator
 } from "../../redux/dialog-reducer"
 
 
 type DialogsPropsType = {
     dialogPage: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    addMessage: () => void
+    updateNewMessageText: (textMessage: string) => void
 }
 
 
 function Dialogs(props: DialogsPropsType) {
 
     const addMessageOnClick = () => {
-        props.dispatch(addMessageActionCreator())
+        props.addMessage()
     }
     const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let textMessage = e.currentTarget.value
-        props.dispatch(UpdateNewMessageTextActionCreator(textMessage))
+        props.updateNewMessageText(textMessage)
     }
 
     let dialogsElements = props.dialogPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)

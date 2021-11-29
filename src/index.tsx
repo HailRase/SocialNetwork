@@ -1,16 +1,16 @@
 import React from 'react';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
+import store from "./redux/store";
 
 const rerenderEntireThree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={store.getState()}
-                     dispatch={store.dispatch.bind(store)}
+                <App store={store}
+                     // dispatch={store.dispatch.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>,

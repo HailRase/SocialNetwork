@@ -8,7 +8,7 @@ export const addPostActionCreator = () => {
         type: ADD_NEW_POST
     } as const
 }
-export const UpdateNewPostTextActionCreator = (newPostText: string) => {
+export const updateNewPostTextActionCreator = (newPostText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newPostText

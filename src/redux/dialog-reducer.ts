@@ -8,14 +8,27 @@ export const addMessageActionCreator = () => {
         type: ADD_NEW_MESSAGE
     } as const
 }
-export const UpdateNewMessageTextActionCreator = (newPostText: string) => {
+export const updateNewMessageTextActionCreator = (newPostText: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_TEXT,
         newText: newPostText
     } as const
 }
 
-let initialState = {
+export type IMessageType = {
+    id: number
+    text: string
+}
+export type IDialogType = {
+    id: number
+    name: string
+}
+export type IDialogsPageType = {
+    dialogs: Array<IDialogType>
+    messages: Array<IMessageType>
+    newMessageText: string
+}
+let initialState: IDialogsPageType = {
     dialogs: [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Yura'},
@@ -30,7 +43,7 @@ let initialState = {
     newMessageText: 'Hi, samurai'
 }
 
-const dialogReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
+const dialogReducer = (state= initialState, action: ActionsTypes):IDialogsPageType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
             let newMessage = {
