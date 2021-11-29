@@ -44,8 +44,6 @@ export type ActionsTypes =
     ReturnType<typeof UpdateNewMessageTextActionCreator>
 
 
-
-
 let store: StoreType = {
     _state: {
         profilePage: {

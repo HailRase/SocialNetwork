@@ -6,7 +6,7 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import {Route} from 'react-router-dom';
-import {ActionsTypes, RootStateType} from "./redux/state";
+import {ActionsTypes, RootStateType} from "./redux/store";
 
 
 type AppPropsType = {
@@ -17,7 +17,6 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
     return (
-
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
