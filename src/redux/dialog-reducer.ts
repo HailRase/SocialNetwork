@@ -1,14 +1,14 @@
-import {ActionsTypes, DialogsPageType} from "./store";
+import {ActionsTypes} from "./store";
 
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
-export const addMessageActionCreator = () => {
+export const addMessageAC = () => {
     return {
         type: ADD_NEW_MESSAGE
     } as const
 }
-export const updateNewMessageTextActionCreator = (newPostText: string) => {
+export const updateNewMessageTextAC = (newPostText: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_TEXT,
         newText: newPostText

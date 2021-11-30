@@ -4,8 +4,8 @@ import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {ActionsTypes, DialogsPageType} from "../../redux/store";
 import {
-    addMessageActionCreator,
-    updateNewMessageTextActionCreator
+    addMessageAC,
+    updateNewMessageTextAC
 } from "../../redux/dialog-reducer"
 
 
