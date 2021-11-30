@@ -23,12 +23,12 @@ export type IDialogType = {
     id: number
     name: string
 }
-export type IDialogsPageType = {
+export type IDialogPageType = {
     dialogs: Array<IDialogType>
     messages: Array<IMessageType>
     newMessageText: string
 }
-let initialState: IDialogsPageType = {
+let initialState: IDialogPageType = {
     dialogs: [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Yura'},
@@ -43,7 +43,7 @@ let initialState: IDialogsPageType = {
     newMessageText: 'Hi, samurai'
 }
 
-const dialogReducer = (state= initialState, action: ActionsTypes):IDialogsPageType => {
+const dialogReducer = (state= initialState, action: ActionsTypes):IDialogPageType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
             let newMessage = {

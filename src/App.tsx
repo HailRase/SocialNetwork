@@ -17,8 +17,8 @@ function App() {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-               {/* <Route path='/dialogs' render={() => <DialogsContainer/>}
-                />*/}
+                <Route path='/dialogs' render={() => <DialogsContainer/>}
+                />
                 <Route path='/profile'
                        render={() => <Profile/>}
                 />
