@@ -43,19 +43,19 @@ let initialState: IDialogPageType = {
     newMessageText: 'Hi, samurai'
 }
 
-const dialogReducer = (state= initialState, action: ActionsTypes):IDialogPageType => {
+const dialogReducer = (state = initialState, action: ActionsTypes): IDialogPageType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
-            let newMessage = {
-                id: 6,
-                text: state.newMessageText
+            return {
+                ...state,
+                messages: [...state.messages, {id: 6, text: state.newMessageText}],
+                newMessageText: ''
             }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText
-            return state
+            return {
+                ...state,
+                newMessageText: action.newText
+            }
         default:
             return state
     }
