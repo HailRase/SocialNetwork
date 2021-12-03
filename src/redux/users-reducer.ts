@@ -20,16 +20,19 @@ export const setUsersAC = (users: Array<UserType>) => {
         users
     } as const
 }
-
+export type PhotosType = {
+    small: string
+    large: string
+}
 export type LocationType = {
     country: string
     city: string
 }
 export type UserType = {
     id: number
-    photoURL: string
+    photos: PhotosType
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
