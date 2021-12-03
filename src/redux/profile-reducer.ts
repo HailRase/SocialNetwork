@@ -1,5 +1,3 @@
-import {ActionsTypes} from "./store";
-
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
@@ -24,6 +22,7 @@ export type IProfilePageType = {
     posts: Array<IPostType>
     newPostText: string
 }
+type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
 
 let initialState: IProfilePageType = {
     posts: [

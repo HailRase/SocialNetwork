@@ -1,5 +1,3 @@
-import {ActionsTypes} from "./store";
-
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
@@ -28,6 +26,8 @@ export type IDialogPageType = {
     messages: Array<IMessageType>
     newMessageText: string
 }
+type ActionsTypes = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
+
 let initialState: IDialogPageType = {
     dialogs: [
         {id: 1, name: 'Dimych'},

@@ -6,6 +6,7 @@ import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import {Route} from 'react-router-dom';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 /*type AppPropsType = {
     store: StoreType
@@ -23,6 +24,7 @@ function App() {
                        render={() => <Profile/>}
                 />
                 <Route path='/news' component={() => <News/>}/>
+                <Route path='/users' component={() => <UsersContainer/>}/>
             </div>
         </div>
 
