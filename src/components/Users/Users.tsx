@@ -3,7 +3,6 @@ import s from './Users.module.css'
 import {UsersPropsType} from "./UsersContainer";
 
 export const Users = (props: UsersPropsType) => {
-debugger
     if (props.users.length === 0) {
         props.setUsers([
             {

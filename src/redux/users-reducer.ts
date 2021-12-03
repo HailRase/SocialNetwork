@@ -55,7 +55,7 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersType => 
                 users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         case SET_USERS:
-            return { ...state, users: [...state.users, ...action.users]}
+            return { ...state, users: [...state.users, ...action.users]} // 3
         default:
             return state
     }
