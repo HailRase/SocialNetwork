@@ -3,3 +3,10 @@
     height: 100px;
     border-radius: 50px;
 }
+
+.selectedPage {
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 18px;
+    font-weight: bold;
+}
