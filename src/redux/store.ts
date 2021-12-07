@@ -1,4 +1,4 @@
-import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPost, updateNewPostText} from "./profile-reducer";
 import dialogReducer, {addMessageAC, updateNewMessageTextAC} from "./dialog-reducer";
 
 
@@ -38,8 +38,8 @@ export type StoreType = {
 }
 
 export type ActionsTypes =
-    ReturnType<typeof addPostAC> |
-    ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof addPost> |
+    ReturnType<typeof updateNewPostText> |
     ReturnType<typeof addMessageAC> |
     ReturnType<typeof updateNewMessageTextAC>
 

@@ -1,7 +1,16 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import {UserProfileType} from "../../../redux/profile-reducer";
+import {Preloader} from "../../common/Preloader/Preloader";
 
-function ProfileInfo() {
+type ProfileInfoPropsType = {
+    userProfile: UserProfileType | null
+}
+
+function ProfileInfo(props: ProfileInfoPropsType) {
+    if (!props.userProfile) {
+        return <Preloader/>
+    }
     return (
         <div>
             <div>
@@ -10,7 +19,9 @@ function ProfileInfo() {
                     alt=""/>
             </div>
             <div className={s.descriptionBlog}>
-                <img src="" alt=""/>ava + description
+                <img src={props.userProfile.photos.large}
+                     style={{borderRadius: "150px"}}/>
+                <span>{props.userProfile.lookingForAJobDescription}</span>
             </div>
         </div>
     );

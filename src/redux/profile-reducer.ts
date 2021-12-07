@@ -1,39 +1,70 @@
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
-export const addPostAC = () => {
+export const addPost = () => {
     return {
         type: ADD_NEW_POST
     } as const
 }
-export const updateNewPostTextAC = (newPostText: string) => {
+export const updateNewPostText = (newPostText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newPostText
     } as const
 }
+export const setUserProfile = (userProfile: UserProfileType) => {
+    return {
+        type: SET_USER_PROFILE,
+        userProfile
+    } as const
+}
 
-export type IPostType = {
+export type UserProfilePhotosType = {
+    small: string
+    large: string
+}
+export type UserProfileContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+export type UserProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: UserProfileContactsType
+    photos: UserProfilePhotosType
+}
+export type PostType = {
     id: number
     text: string
     likesCount: number
 }
-export type IProfilePageType = {
-    posts: Array<IPostType>
+export type ProfilePageType = {
+    posts: Array<PostType>
     newPostText: string
+    userProfile: UserProfileType | null
 }
-type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+type ActionsTypes = ReturnType<typeof addPost> | ReturnType<typeof updateNewPostText> | ReturnType<typeof setUserProfile>
 
-let initialState: IProfilePageType = {
+let initialState: ProfilePageType = {
     posts: [
         {id: 1, text: 'Hi, how old are you?', likesCount: 10},
         {id: 2, text: 'It\'s my first post', likesCount: 15},
         {id: 3, text: 'How is your it-kamasutra?', likesCount: 20}
     ],
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    userProfile: null
 }
 
-const profileReducer = (state = initialState, action: ActionsTypes): IProfilePageType => {
+const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case ADD_NEW_POST:
             return {
@@ -45,6 +76,11 @@ const profileReducer = (state = initialState, action: ActionsTypes): IProfilePag
             return {
                 ...state,
                 newPostText: action.newText
+            }
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                userProfile: action.userProfile
             }
         default:
             return state

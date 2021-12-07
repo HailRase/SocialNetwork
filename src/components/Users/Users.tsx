@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Users.module.css";
 import photo from "../../assets/images/user-man.png";
 import {UserType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
     users: Array<UserType>
@@ -22,20 +23,22 @@ export const Users = (props: UserPropsType) => {
         pagesArray.push(i)
     }
 
-  return (
-      <div>
-          <div>
-              {pagesArray.map(p => <span
-                  style={{cursor: "pointer", margin: "5px 5px"}}
-                  className={props.currentPage === p ? s.selectedPage : ''}
-                  onClick={() => props.onPageChanged(p)}
-              >{p}</span>)}
-          </div>
-          {
-              props.users.map(u => <div key={u.id}>
+    return (
+        <div>
+            <div>
+                {pagesArray.map(p => <span
+                    style={{cursor: "pointer", margin: "5px 5px"}}
+                    className={props.currentPage === p ? s.selectedPage : ''}
+                    onClick={() => props.onPageChanged(p)}
+                >{p}</span>)}
+            </div>
+            {
+                props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={`/profile/${u.id}`}>
                             <img src={u.photos.small !== null ? u.photos.small : photo} className={s.userPhoto}/>
+                                </NavLink>
                         </div>
                         <div>
                             {u.followed
@@ -44,7 +47,7 @@ export const Users = (props: UserPropsType) => {
                             }
                         </div>
                     </span>
-                  <span>
+                    <span>
                         <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
@@ -54,8 +57,8 @@ export const Users = (props: UserPropsType) => {
                             <div>{"u.location.city"}</div>
                         </span>
                     </span>
-              </div>)
-          }
-      </div>
-  )
+                </div>)
+            }
+        </div>
+    )
 }
