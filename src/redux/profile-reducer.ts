@@ -1,24 +1,11 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
-export const addPost = () => {
-    return {
-        type: ADD_NEW_POST
-    } as const
-}
-export const updateNewPostText = (newPostText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newPostText
-    } as const
-}
-export const setUserProfile = (userProfile: UserProfileType) => {
-    return {
-        type: SET_USER_PROFILE,
-        userProfile
-    } as const
-}
+
 
 export type UserProfilePhotosType = {
     small: string
@@ -87,4 +74,26 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
     }
 }
 
+export const addPost = () => {
+    return {
+        type: ADD_NEW_POST
+    } as const
+}
+export const updateNewPostText = (newPostText: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: newPostText
+    } as const
+}
+export const setUserProfile = (userProfile: UserProfileType) => {
+    return {
+        type: SET_USER_PROFILE,
+        userProfile
+    } as const
+}
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(Number(userId)).then(data => {
+        dispatch(setUserProfile(data))
+    })
+}
 export default profileReducer

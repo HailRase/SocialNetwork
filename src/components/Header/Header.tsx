@@ -9,6 +9,7 @@ type HeaderPropsType = {
 }
 
 function Header(props: HeaderPropsType) {
+    debugger
     return (
         <header className={s.header}>
             <img

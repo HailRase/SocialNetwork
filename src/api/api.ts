@@ -31,27 +31,28 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
-    }
-}
-export const followAPI = {
-    deleteFollow(userId: number){
-        return instance.delete<FollowResponseType>(`/follow/${userId}`)
+    },
+    unfollow(userId: number){
+        return instance.delete<FollowResponseType>(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    postFollow(userId: number){
-        return instance.post<FollowResponseType>(`/follow/${userId}`)
+    follow(userId: number){
+        return instance.post<FollowResponseType>(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    getProfile(userId: number){
+        return instance.get<ProfileResponseType>(`profile/${userId}`)
             .then(response => {
                 return response.data
             })
     }
 }
-export const profileAPI = {
-    getProfile(userId: number){
-        return instance.get<ProfileResponseType>(`/profile/${userId}`)
-            .then(response => {
-                return response.data
-            })
+export const authAPI = {
+    me(){
+       return  instance.get(`auth/me`)
     }
 }

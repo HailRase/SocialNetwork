@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
@@ -6,49 +9,6 @@ const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
 const SET_FETCHING = 'SET-FETCHING'
 const SET_FOLLOWING_IN_PROGRESS = 'SET-FOLLOWING-IN-PROGRESS'
 
-export const follow = (userId: number) => {
-    return {
-        type: FOLLOW,
-        userId
-    } as const
-}
-export const unfollow = (userId: number) => {
-    return {
-        type: UNFOLLOW,
-        userId
-    } as const
-}
-export const setUsers = (users: Array<UserType>) => {
-    return {
-        type: SET_USERS,
-        users
-    } as const
-}
-export const setCurrentPage = (currentPage: number) => {
-    return {
-        type: SET_CURRENT_PAGE,
-        currentPage
-    } as const
-}
-export const setTotalUsersCount = (totalUsersCount: number) => {
-    return {
-        type: SET_TOTAL_USERS_COUNT,
-        totalUsersCount
-    } as const
-}
-export const setFetching = (isFetching: boolean) => {
-    return {
-        type: SET_FETCHING,
-        isFetching
-    } as const
-}
-export const setFollowingInProgress = (isFetching: boolean, userId: number) => {
-    return {
-        type: SET_FOLLOWING_IN_PROGRESS,
-        isFetching,
-        userId
-    } as const
-}
 
 export type PhotosType = {
     small: string
@@ -75,8 +35,8 @@ export type UsersType = {
     followingInProgress: number[]
 }
 type ActionsTypes =
-    ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
@@ -122,6 +82,77 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersType => 
         default:
             return state
     }
+}
+
+export const followSuccess = (userId: number) => {
+    return {
+        type: FOLLOW,
+        userId
+    } as const
+}
+export const unfollowSuccess = (userId: number) => {
+    return {
+        type: UNFOLLOW,
+        userId
+    } as const
+}
+export const setUsers = (users: Array<UserType>) => {
+    return {
+        type: SET_USERS,
+        users
+    } as const
+}
+export const setCurrentPage = (currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
+    } as const
+}
+export const setTotalUsersCount = (totalUsersCount: number) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        totalUsersCount
+    } as const
+}
+export const setFetching = (isFetching: boolean) => {
+    return {
+        type: SET_FETCHING,
+        isFetching
+    } as const
+}
+export const setFollowingInProgress = (isFetching: boolean, userId: number) => {
+    return {
+        type: SET_FOLLOWING_IN_PROGRESS,
+        isFetching,
+        userId
+    } as const
+}
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(setFetching(true))
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
+}
+export const follow = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(true, userId))
+    usersAPI.follow(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(followSuccess(userId))
+        }
+        dispatch(setFollowingInProgress(false,userId))
+    })
+}
+export const unfollow = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(true, userId))
+    usersAPI.unfollow(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(unfollowSuccess(userId))
+        }
+        dispatch(setFollowingInProgress(false,userId))
+    })
 }
 
 export default usersReducer

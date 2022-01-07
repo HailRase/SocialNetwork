@@ -1,18 +1,10 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
 
-export const setAuthUserData = (data: UserDataType) => {
-    return {
-        type: SET_AUTH_USER_DATA,
-        data
-    } as const
-}
-export const setFetching = (isFetching: boolean) => {
-  return {
-      type: SET_FETCHING,
-      isFetching
-  } as const
-}
+
 
 export type UserDataType = {
     id: number
@@ -40,7 +32,7 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataTy
         case SET_AUTH_USER_DATA:
             return {
                 ...state,
-                ...action.data,
+                data: action.data,
                 isAuth: true
             }
         case SET_FETCHING:
@@ -48,6 +40,26 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataTy
         default:
             return state
     }
+}
+
+export const setAuthUserData = (data: UserDataType) => {
+    return {
+        type: SET_AUTH_USER_DATA,
+        data
+    } as const
+}
+export const setFetching = (isFetching: boolean) => {
+    return {
+        type: SET_FETCHING,
+        isFetching
+    } as const
+}
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    authAPI.me().then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUserData(response.data.data))
+        }
+    })
 }
 
 export default authReducer
