@@ -18,6 +18,7 @@ function Dialogs(props: DialogsPropsType) {
     let dialogsElements = props.dialogPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messageElements = props.dialogPage.messages.map(m => <Message text={m.text} id={m.id}/>)
 
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

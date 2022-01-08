@@ -9,6 +9,8 @@ type ProfilePropsType = {
 
 function Profile(props: ProfilePropsType) {
 
+
+
     return (
         <div>
             <ProfileInfo userProfile={props.userProfile}/>
