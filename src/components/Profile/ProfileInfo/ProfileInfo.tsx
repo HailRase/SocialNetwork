@@ -2,9 +2,12 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {UserProfileType} from "../../../redux/profile-reducer";
 import {Preloader} from "../../common/Preloader/Preloader";
+import ProfileStatus from './ProfileStatus'
 
 type ProfileInfoPropsType = {
     userProfile: UserProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 function ProfileInfo(props: ProfileInfoPropsType) {
@@ -13,14 +16,15 @@ function ProfileInfo(props: ProfileInfoPropsType) {
     }
     return (
         <div>
-            <div style={{ width: "1000px"}}>
+            {/*<div style={{ width: "1000px"}}>
                 <img style={{ height: "300px", width: "100%"}}
                     src="https://sebweo.com/wp-content/uploads/2019/06/landshaft-bernskikh-alp-v-yasniy-den_thumb.jpg"
                     alt=""/>
-            </div>
+            </div>*/}
             <div className={s.descriptionBlog}>
                 <img src={props.userProfile.photos.large}
                      style={{borderRadius: "150px"}}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <span>{props.userProfile.fullName}</span>
                 <span>{props.userProfile.lookingForAJob}</span>
                 <span>{props.userProfile.lookingForAJobDescription}</span>

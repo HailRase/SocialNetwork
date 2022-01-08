@@ -13,6 +13,13 @@ type FollowResponseType = {
     messages:Array<string>
     data: {}
 }
+type UpdateStatusResponseType = {
+    resultCode: number
+    messages: string[]
+    data: object
+}
+
+
 type ProfileResponseType = UserProfileType
 
 const instance = axios.default.create({
@@ -45,12 +52,29 @@ export const usersAPI = {
             })
     },
     getProfile(userId: number){
+        console.warn('Obsolete method. Please profileAPI object.')
+        return profileAPI.getProfile(userId)
+    }
+}
+export const profileAPI = {
+    getProfile(userId: number){
         return instance.get<ProfileResponseType>(`profile/${userId}`)
             .then(response => {
                 return response.data
             })
+    },
+    getStatus(userId: number){
+        return instance.get(`profile/status/${userId}`).then( response => {
+            return response.data
+        })
+    },
+    updateStatus(status:  string ){
+        return instance.put<UpdateStatusResponseType>(`profile/status/`, {status}).then(response => {
+            return response.data
+        })
     }
 }
+
 export const authAPI = {
     me(){
        return  instance.get(`auth/me`)
