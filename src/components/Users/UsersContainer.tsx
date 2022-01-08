@@ -1,9 +1,18 @@
 import React from "react";
 import {StoreType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {followSuccess, getUsers, setCurrentPage, setFollowingInProgress, unfollowSuccess, UserType} from "../../redux/users-reducer";
+import {
+    followSuccess,
+    getUsers,
+    setCurrentPage,
+    setFollowingInProgress,
+    unfollowSuccess,
+    UserType
+} from "../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStateToPropsType = {
     users: Array<UserType>
@@ -60,9 +69,11 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {
-    follow: followSuccess,
-    unfollow: unfollowSuccess,
-    setCurrentPage,
-    getUsers
-})(UsersContainer)
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow: followSuccess,
+        unfollow: unfollowSuccess,
+        setCurrentPage,
+        getUsers
+    }))(UsersContainer)
