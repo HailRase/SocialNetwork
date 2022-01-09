@@ -1,6 +1,5 @@
-import profileReducer, {addPost, updateNewPostText} from "./profile-reducer";
-import dialogReducer, {addMessageAC, updateNewMessageTextAC} from "./dialog-reducer";
-
+import {addPost} from "./profile-reducer";
+import {addMessageAC} from "./dialog-reducer";
 
 
 export type MessageType = {
@@ -23,7 +22,6 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -39,9 +37,7 @@ export type StoreType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPost> |
-    ReturnType<typeof updateNewPostText> |
-    ReturnType<typeof addMessageAC> |
-    ReturnType<typeof updateNewMessageTextAC>
+    ReturnType<typeof addMessageAC>
 
 
 let store: StoreType = {
@@ -65,8 +61,7 @@ let store: StoreType = {
                 {id: 1, text: 'Hi'},
                 {id: 2, text: 'How are you?'},
                 {id: 3, text: 'How is your it-kamasutra?'}
-            ],
-            newMessageText: 'Hi, samurai'
+            ]
         },
     },
     getState() {

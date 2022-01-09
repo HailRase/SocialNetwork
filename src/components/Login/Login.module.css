@@ -1,0 +1,15 @@
+.loginElementsPosition {
+    display: flex;
+    width:400px;
+    border: 1px solid black;
+    background-color: cornflowerblue;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+.formElementsPosition {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}

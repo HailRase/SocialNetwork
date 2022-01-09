@@ -10,10 +10,15 @@ type GetUsersResponseType = {
 }
 type FollowResponseType = {
     resultCode: number
-    messages:Array<string>
-    data: {}
+    messages: Array<string>
+    data: object
 }
 type UpdateStatusResponseType = {
+    resultCode: number
+    messages: string[]
+    data: object
+}
+type AuthorizeLoginResponseType = {
     resultCode: number
     messages: string[]
     data: object
@@ -31,7 +36,6 @@ const instance = axios.default.create({
 })
 
 
-
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
@@ -39,44 +43,52 @@ export const usersAPI = {
                 return response.data
             })
     },
-    unfollow(userId: number){
+    unfollow(userId: number) {
         return instance.delete<FollowResponseType>(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    follow(userId: number){
+    follow(userId: number) {
         return instance.post<FollowResponseType>(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    getProfile(userId: number){
+    getProfile(userId: number) {
         console.warn('Obsolete method. Please profileAPI object.')
         return profileAPI.getProfile(userId)
     }
 }
 export const profileAPI = {
-    getProfile(userId: number){
+    getProfile(userId: number) {
         return instance.get<ProfileResponseType>(`profile/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    getStatus(userId: number){
-        return instance.get(`profile/status/${userId}`).then( response => {
+    getStatus(userId: number) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => {
             return response.data
         })
     },
-    updateStatus(status:  string ){
-        return instance.put<UpdateStatusResponseType>(`profile/status/`, {status}).then(response => {
+    updateStatus(status: string) {
+        return instance.put<UpdateStatusResponseType>(`profile/status/`, {status})
+            .then(response => {
             return response.data
         })
     }
 }
 
 export const authAPI = {
-    me(){
-       return  instance.get(`auth/me`)
+    me() {
+        return instance.get(`auth/me`)
+    },
+    login(email: string, password: string, rememberMe: boolean, captcha?: boolean) {
+        return instance.post<AuthorizeLoginResponseType>(`auth/login`, {email, password, rememberMe, captcha})
+            .then(response => {
+                return response.data
+            })
     }
 }

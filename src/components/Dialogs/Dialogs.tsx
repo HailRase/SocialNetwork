@@ -3,20 +3,17 @@ import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogsPropsType} from "./DialogsContainer";
+import AddMessageForm, {AddMessageFormType} from "./AddMessageForm";
 
 
 function Dialogs(props: DialogsPropsType) {
 
-    const addMessageOnClick = () => {
-        props.addMessage()
+    const onSubmitAddMessage = (message: AddMessageFormType) => {
+        props.addMessage(message.newMessageText)
+        message.newMessageText = ''
     }
-    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let textMessage = e.currentTarget.value
-        props.updateNewMessageText(textMessage)
-    }
-
-    let dialogsElements = props.dialogPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messageElements = props.dialogPage.messages.map(m => <Message text={m.text} id={m.id}/>)
+    let dialogsElements = props.dialogPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElements = props.dialogPage.messages.map(m => <Message key={m.id} text={m.text} id={m.id}/>)
 
 
     return (
@@ -27,15 +24,7 @@ function Dialogs(props: DialogsPropsType) {
             <div className={s.messages}>
                 {messageElements}
                 <div>
-                    <div>
-                        <textarea onChange={onChangeMessage}
-                                  value={props.dialogPage.newMessageText}/>
-                    </div>
-                    <div>
-                        <button onClick={addMessageOnClick}>
-                            Add message
-                        </button>
-                    </div>
+                    <AddMessageForm onSubmit={onSubmitAddMessage}/>
                 </div>
             </div>
         </div>

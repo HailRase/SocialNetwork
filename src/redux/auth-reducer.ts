@@ -3,7 +3,7 @@ import {authAPI} from "../api/api";
 
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
-
+const SET_USER_AUTHORIZATION = 'SET-USER-AUTHORIZATION'
 
 
 export type UserDataType = {
@@ -17,9 +17,9 @@ export type AuthUserDataType = {
     isAuth: boolean
 }
 
-type ActionsTypes =
-    ReturnType<typeof setAuthUserData>
-| ReturnType<typeof setFetching>
+type ActionsTypes = ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof setFetching>
+    | ReturnType<typeof setUserAuthorization>
 
 let initialState: AuthUserDataType = {
     data: null,
@@ -36,7 +36,15 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataTy
                 isAuth: true
             }
         case SET_FETCHING:
-            return {...state, isFetching: action.isFetching}
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        case SET_USER_AUTHORIZATION:
+            return {
+                ...state,
+                isAuth: action.isAuth
+            }
         default:
             return state
     }
@@ -54,12 +62,28 @@ export const setFetching = (isFetching: boolean) => {
         isFetching
     } as const
 }
+export const setUserAuthorization = (isAuth: boolean) => {
+    return {
+        type: SET_USER_AUTHORIZATION,
+        isAuth
+    } as const
+}
+
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             dispatch(setAuthUserData(response.data.data))
         }
     })
+}
+export const getUserAuthorization = (email: string, password: string, rememberMe: boolean, captcha?: boolean) => (dispatch: Dispatch) => {
+    dispatch(setFetching(true))
+    authAPI.login(email, password, rememberMe, captcha).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setUserAuthorization(true))
+        }
+        dispatch(setFetching(false))
+    }).catch(error => console.log(error))
 }
 
 export default authReducer

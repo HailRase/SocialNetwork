@@ -1,17 +1,12 @@
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
-export const addMessageAC = () => {
+export const addMessageAC = (message: string) => {
     return {
-        type: ADD_NEW_MESSAGE
+        type: ADD_NEW_MESSAGE,
+        message
     } as const
 }
-export const updateNewMessageTextAC = (newPostText: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newText: newPostText
-    } as const
-}
+
 
 export type IMessageType = {
     id: number
@@ -24,9 +19,8 @@ export type IDialogType = {
 export type IDialogPageType = {
     dialogs: Array<IDialogType>
     messages: Array<IMessageType>
-    newMessageText: string
 }
-type ActionsTypes = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
+type ActionsTypes = ReturnType<typeof addMessageAC>
 
 let initialState: IDialogPageType = {
     dialogs: [
@@ -39,8 +33,7 @@ let initialState: IDialogPageType = {
         {id: 1, text: 'Hi'},
         {id: 2, text: 'How are you?'},
         {id: 3, text: 'How is your it-kamasutra?'}
-    ],
-    newMessageText: 'Hi, samurai'
+    ]
 }
 
 const dialogReducer = (state = initialState, action: ActionsTypes): IDialogPageType => {
@@ -48,13 +41,7 @@ const dialogReducer = (state = initialState, action: ActionsTypes): IDialogPageT
         case ADD_NEW_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: 6, text: state.newMessageText}],
-                newMessageText: ''
-            }
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newText
+                messages: [...state.messages, {id: 6, text: action.message}],
             }
         default:
             return state
