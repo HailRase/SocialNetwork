@@ -1,7 +1,11 @@
-.messages {
-    padding: 10px;
-}
+.message{
+    margin: 10px 0 20px 0;
 
-.message {
+}
+.message span {
+    background-color: #4b4b56;
+    border-radius: 5px;
     color: white;
+    font-size: 20px;
+    padding: 5px 10px 7px 10px;
 }

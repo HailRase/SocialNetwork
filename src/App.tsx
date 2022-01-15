@@ -11,7 +11,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 function App() {
     return (
-        <div className='app-wrapper'>
+        <div style={{borderRadius: '10px'}} className='app-wrapper'>
             <HeaderContainer/>
             <Navbar/>
             <div className='app-wrapper-content'>

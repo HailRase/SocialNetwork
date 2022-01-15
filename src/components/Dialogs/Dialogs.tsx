@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
@@ -21,8 +21,10 @@ function Dialogs(props: DialogsPropsType) {
             <div className={s.dialogsItems}>
                 {dialogsElements}
             </div>
-            <div className={s.messages}>
-                {messageElements}
+            <div>
+                <div className={s.messages}>
+                    {messageElements}
+                </div>
                 <div>
                     <AddMessageForm onSubmit={onSubmitAddMessage}/>
                 </div>

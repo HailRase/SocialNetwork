@@ -1,0 +1,26 @@
+.formControl.error textarea,
+.formControl.error input{
+    border: solid 3px red;
+}
+.formControl.error .errorMessage{
+    color: red;
+}
+
+.errorMessage {
+    padding: 5px;
+    margin-left: 10px;
+    margin-top: 20px;
+    background-color: #65441e;
+}
+
+.textarea {
+    width: 30%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}

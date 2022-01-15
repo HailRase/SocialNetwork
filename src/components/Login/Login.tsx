@@ -4,6 +4,8 @@ import s from './Login.module.css';
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {getUserAuthorization} from "../../redux/auth-reducer";
+import {Input} from "../common/FormsControl/Textarea";
+import {required} from "../../utils/validators/validators";
 
 type FormDataType = {
     login: string
@@ -24,13 +26,19 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.formElementsPosition}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={'input'}/>
+                <Field name={'login'}
+                       component={Input}
+                       validate={[required]}
+                       placeholder={'Login'}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={'input'}/>
+                <Field name={'password'}
+                       component={Input}
+                       validate={[required]}
+                       placeholder={'Password'}/>
             </div>
             <div>
-                <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
+                <Field component={Input} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
             <div>
                 <button>Login</button>

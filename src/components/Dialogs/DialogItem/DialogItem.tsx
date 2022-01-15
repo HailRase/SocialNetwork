@@ -5,8 +5,8 @@ import {DialogType} from "../../../redux/store";
 
 function DialogItem(props:DialogType) {
     return (
-        <div className={s.dialog + ' ' + s.active}>
-            <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
+        <div className={s.dialogsItem}>
+            <NavLink style={{textDecoration: "none"}} to={"/dialogs/" + props.id}>{props.name}</NavLink>
         </div>
     );
 }
