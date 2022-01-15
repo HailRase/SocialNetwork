@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {StoreType} from "./redux-store";
 
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
@@ -7,9 +9,9 @@ const SET_USER_AUTHORIZATION = 'SET-USER-AUTHORIZATION'
 
 
 export type UserDataType = {
-    id: number
-    email: string
-    login: string
+    id: number | null
+    email: string | null
+    login: string | null
 }
 export type AuthUserDataType = {
     data: UserDataType | null
@@ -50,7 +52,7 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataTy
     }
 }
 
-export const setAuthUserData = (data: UserDataType) => {
+export const setAuthUserData = (data: UserDataType | null) => {
     return {
         type: SET_AUTH_USER_DATA,
         data
@@ -72,18 +74,29 @@ export const setUserAuthorization = (isAuth: boolean) => {
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
+            dispatch(setUserAuthorization(true))
             dispatch(setAuthUserData(response.data.data))
         }
     })
 }
-export const getUserAuthorization = (email: string, password: string, rememberMe: boolean, captcha?: boolean) => (dispatch: Dispatch) => {
-    dispatch(setFetching(true))
+export const login = (email: string, password: string, rememberMe: boolean, captcha?: boolean): ThunkType => (dispatch) => {
     authAPI.login(email, password, rememberMe, captcha).then(data => {
         if (data.resultCode === 0) {
-            dispatch(setUserAuthorization(true))
+            dispatch(getAuthUserData())
         }
-        dispatch(setFetching(false))
     }).catch(error => console.log(error))
 }
+export const logout = (): ThunkType => (dispatch) => {
+    authAPI.logout().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null))
+        }
+        dispatch(setUserAuthorization(false))
+    }).catch(error => console.log(error))
+}
+
+
+export type ThunkType = ThunkAction<void, StoreType, unknown, ActionsTypes>
+
 
 export default authReducer

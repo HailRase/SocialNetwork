@@ -13,7 +13,9 @@ const AddMessageForm = (props: InjectedFormProps<AddMessageFormType>) => {
             <Field component={Textarea}
                    validate={[required, maxLength50]}
                    name={"newMessageText"}
-                   placeholder={"Enter your text"}/>
+                   placeholder={"Enter your text"}
+                    style={{backgroundColor: "#a95dff", outline: "none", color: '#ecdc45'}}
+            />
             <div>
                 <button>
                     Add message

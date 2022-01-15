@@ -3,12 +3,13 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import s from './Login.module.css';
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
-import {getUserAuthorization} from "../../redux/auth-reducer";
 import {Input} from "../common/FormsControl/Textarea";
 import {required} from "../../utils/validators/validators";
+import {login} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -17,7 +18,7 @@ type MapStateToPropsType = {
     isFetching: boolean
 }
 type MapDispatchToPropsType = {
-    getUserAuthorization: (email: string, password: string, rememberMe: boolean, captcha?: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha?: boolean) => void
 }
 
 type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -26,13 +27,14 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.formElementsPosition}>
             <div>
-                <Field name={'login'}
+                <Field name={'email'}
                        component={Input}
                        validate={[required]}
                        placeholder={'Login'}/>
             </div>
             <div>
                 <Field name={'password'}
+                       type={'password'}
                        component={Input}
                        validate={[required]}
                        placeholder={'Password'}/>
@@ -58,8 +60,9 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
 
 const Login = (props: LoginPropsType) => {
     const onSubmitHandler = (formData: FormDataType) => {
-        props.getUserAuthorization(formData.login, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
+    if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
         <div className={s.loginElementsPosition}>
             <h1>LOGIN</h1>
@@ -68,4 +71,4 @@ const Login = (props: LoginPropsType) => {
     );
 };
 
-export default connect(mapStateToProps, {getUserAuthorization})(Login);
+export default connect(mapStateToProps, {login})(Login);

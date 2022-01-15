@@ -1,15 +1,20 @@
 .header {
     grid-area: h;
-    background-color: #a95dff;
+    background-color: #ecdc45;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header img {
     width: 60px;
 }
 
-.loginBlock {
-    float: right;
-}
+.loginBlock,
 .loginBlock a{
-    color: aliceblue;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #7345c2;
+    font-family: Consolas;
+    font-weight: bold;
 }
