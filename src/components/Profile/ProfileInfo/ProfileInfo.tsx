@@ -16,11 +16,6 @@ function ProfileInfo(props: ProfileInfoPropsType) {
     }
     return (
         <div>
-            {/*<div style={{ width: "1000px"}}>
-                <img style={{ height: "300px", width: "100%"}}
-                    src="https://sebweo.com/wp-content/uploads/2019/06/landshaft-bernskikh-alp-v-yasniy-den_thumb.jpg"
-                    alt=""/>
-            </div>*/}
             <div className={s.descriptionBlog}>
                 <img src={props.userProfile.photos.large}
                      style={{borderRadius: "150px"}}/>

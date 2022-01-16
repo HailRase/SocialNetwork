@@ -29,14 +29,28 @@ export type ProfileContainerPropsType =
 
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
-
-    componentDidMount() {
+    getProfile(){
         let userId = this.props.match.params.userId
-        if (!userId) {
+        if (!userId ) {
             userId = this.props.authorizedUserId + ''
+            if(!userId){
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfile(+userId)
         this.props.getStatus(+userId)
+    }
+    componentDidMount() {
+        this.getProfile()
+    }
+
+    componentDidUpdate(prevProps: ProfileContainerPropsType) {
+        if (this.props.location !== prevProps.location){
+            if (this.props.authorizedUserId) {
+                this.props.getUserProfile(this.props.authorizedUserId)
+                this.props.getStatus(this.props.authorizedUserId)
+            }
+        }
     }
 
     render() {

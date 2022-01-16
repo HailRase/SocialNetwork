@@ -3,6 +3,7 @@ import {authAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./redux-store";
 import {stopSubmit} from "redux-form";
+import {batch} from "react-redux";
 
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
@@ -77,7 +78,6 @@ export const setUserAuthorization = (isAuth: boolean) => {
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setUserAuthorization(true))
             dispatch(setAuthUserData(response.data.data))
         }
     })
