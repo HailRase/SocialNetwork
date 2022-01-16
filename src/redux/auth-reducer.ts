@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
@@ -9,9 +10,9 @@ const SET_USER_AUTHORIZATION = 'SET-USER-AUTHORIZATION'
 
 
 export type UserDataType = {
-    id: number | null
-    email: string | null
-    login: string | null
+    id: number
+    email: string
+    login: string
 }
 export type AuthUserDataType = {
     data: UserDataType | null
@@ -22,6 +23,8 @@ export type AuthUserDataType = {
 type ActionsTypes = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setUserAuthorization>
+
+type StopSubmitType = ReturnType<typeof stopSubmit>
 
 let initialState: AuthUserDataType = {
     data: null,
@@ -72,7 +75,7 @@ export const setUserAuthorization = (isAuth: boolean) => {
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             dispatch(setUserAuthorization(true))
             dispatch(setAuthUserData(response.data.data))
@@ -83,6 +86,8 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     authAPI.login(email, password, rememberMe, captcha).then(data => {
         if (data.resultCode === 0) {
             dispatch(getAuthUserData())
+        }else{
+            dispatch(stopSubmit('login', {_error: data.messages}))
         }
     }).catch(error => console.log(error))
 }
@@ -96,7 +101,7 @@ export const logout = (): ThunkType => (dispatch) => {
 }
 
 
-export type ThunkType = ThunkAction<void, StoreType, unknown, ActionsTypes>
-
+export type ThunkType = ThunkAction<void, StoreType, unknown, CommonActionType>
+type CommonActionType = ActionsTypes | StopSubmitType
 
 export default authReducer

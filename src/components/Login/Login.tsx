@@ -12,6 +12,7 @@ type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    error: string
 }
 type MapStateToPropsType = {
     isAuth: boolean
@@ -42,6 +43,9 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             <div>
                 <Field component={Input} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
+            {
+                props.error && <div style={{color: 'red'}}>{props.error}</div>
+            }
             <div>
                 <button>Login</button>
             </div>
