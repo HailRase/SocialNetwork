@@ -75,29 +75,26 @@ export const setUserAuthorization = (isAuth: boolean) => {
     } as const
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    return authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserData(response.data.data))
-        }
-    })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(response.data.data))
+    }
 }
-export const login = (email: string, password: string, rememberMe: boolean, captcha?: boolean): ThunkType => (dispatch) => {
-    authAPI.login(email, password, rememberMe, captcha).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        }else{
-            dispatch(stopSubmit('login', {_error: data.messages}))
-        }
-    }).catch(error => console.log(error))
+export const login = (email: string, password: string, rememberMe: boolean, captcha?: boolean): ThunkType => async (dispatch) => {
+    let data = await authAPI.login(email, password, rememberMe, captcha)
+    if (data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        dispatch(stopSubmit('login', {_error: data.messages}))
+    }
 }
-export const logout = (): ThunkType => (dispatch) => {
-    authAPI.logout().then(data => {
-        if (data.resultCode === 0) {
-            dispatch(setAuthUserData(null))
-        }
-        dispatch(setUserAuthorization(false))
-    }).catch(error => console.log(error))
+export const logout = (): ThunkType => async (dispatch) => {
+    let data = await authAPI.logout()
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(null))
+    }
+    dispatch(setUserAuthorization(false))
 }
 
 

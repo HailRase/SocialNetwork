@@ -1,7 +1,7 @@
 import React from "react";
 import {StoreType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {followSuccess, requestUsers, setCurrentPage, unfollowSuccess, UserType} from "../../redux/users-reducer";
+import {follow, requestUsers, setCurrentPage, unfollow, UserType} from "../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -33,7 +33,8 @@ type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
@@ -83,8 +84,8 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
 export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(mapStateToProps, {
-        follow: followSuccess,
-        unfollow: unfollowSuccess,
+        follow,
+        unfollow,
         setCurrentPage,
         getUsers: requestUsers
     }))(UsersContainer)

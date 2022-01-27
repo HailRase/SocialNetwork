@@ -11,21 +11,24 @@ type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
 }
 
-function ProfileInfo(props: ProfileInfoPropsType) {
-    if (!props.userProfile) {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
+                                                         userProfile,
+                                                         status,
+                                                         updateStatus
+                                                     }) => {
+    if (!userProfile) {
         return <Preloader/>
     }
     return (
         <div>
             <div className={s.descriptionBlog}>
-                <img src={props.userProfile.photos.large}
+                <img src={userProfile.photos.large}
                      style={{borderRadius: "150px"}}/>
-                {/*<ProfileStatus={props.status} updateStatus={props.updateStatus}/>*/}
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <span>{props.userProfile.fullName}</span>
-                <span>{props.userProfile.lookingForAJob}</span>
-                <span>{props.userProfile.lookingForAJobDescription}</span>
-                <span>{props.userProfile.userId}</span>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                <span>{userProfile.fullName}</span>
+                <span>{userProfile.lookingForAJob}</span>
+                <span>{userProfile.lookingForAJobDescription}</span>
+                <span>{userProfile.userId}</span>
             </div>
         </div>
     );

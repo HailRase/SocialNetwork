@@ -1,7 +1,8 @@
 import React, {DetailedHTMLProps, FC, InputHTMLAttributes, TextareaHTMLAttributes} from 'react';
 import {WrappedFieldProps} from "redux-form/lib/Field";
-import s from './Textarea.module.css'
-
+import s from './FormsControl.module.css'
+import {Field} from "redux-form";
+import {required} from "../../../utils/validators/validators";
 
 type DefaultTextAreaPropsType = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -10,20 +11,19 @@ type InputPropsType = DefaultInputPropsType & WrappedFieldProps
 type FormControlPropsType = InputPropsType & TextareaPropsType
 const FormControl: FC<FormControlPropsType> = ({
                                                    input,
-                                                   meta,
-                                                   children,
-                                                   ...restProps
+                                                   meta:{touched, error},
+                                                   children
                                                }) => {
-    const showError = meta.touched && meta.error
+    const showError = touched && error
 
     return (
         <div className={showError ? `${s.formControl} ${s.error}` : s.formControl}>
             {children}
-            {showError && <span className={s.errorMessage}>{meta.error}</span>}
+            {showError && <span className={s.errorMessage}>{error}</span>}
         </div>
     );
 }
-export const Textarea: FC<TextareaPropsType> = ({
+export const FormsControl: FC<TextareaPropsType> = ({
                                                     input,
                                                     meta,
                                                     ...restProps
@@ -46,3 +46,14 @@ export const Input: FC<InputPropsType> = ({
         </FormControl>
     );
 };
+
+export const createField = <T, C, P>(placeholder?: string, name?: string, validators?: T | Array<T>, component?: C, props?: P , text?: string )=> (
+    <div>
+        <Field name={name}
+               component={component}
+               validate={validators}
+               placeholder={placeholder}
+               {...props}
+        />{text}
+    </div>
+)

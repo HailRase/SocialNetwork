@@ -8,7 +8,7 @@ type GetUsersResponseType = {
     totalCount: number
     error: string | null
 }
-type FollowResponseType = {
+export type FollowResponseType = {
     resultCode: number
     messages: Array<string>
     data: object
@@ -92,7 +92,7 @@ export const authAPI = {
             })
     },
     logout() {
-        return instance.delete(`auth/login`)
+        return instance.delete<AuthorizeLoginResponseType>(`auth/login`)
             .then(response => {
                 return response.data
             })
