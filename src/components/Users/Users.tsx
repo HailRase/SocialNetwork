@@ -1,10 +1,8 @@
 import React from "react";
-import s from "./Users.module.css";
-import photo from "../../assets/images/user-man.png";
+import s from './Users.module.css'
 import {UserType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../common/Paginator/Paginator";
-import User from "./User";
+import User from "./User/User";
 
 type UserPropsType = {
     users: Array<UserType>
@@ -21,19 +19,23 @@ type UserPropsType = {
 export const Users = ({currentPage, onPageChanged, pageSize, totalUsersCount, users, ...props}: UserPropsType) => {
 
     return (
-        <div>
-            <Paginator currentPage={currentPage}
-                       onPageChanged={onPageChanged}
-                       pageSize={pageSize}
-                       totalUsersCount={totalUsersCount}
-            />
-            {
-                users.map(u => <User key={u.id}
-                                     user={u}
-                                     follow={props.follow}
-                                     unfollow={props.unfollow}
-                                     followingInProgress={props.followingInProgress}/>)
-            }
+        <div className={s.usersContainer}>
+            <div>
+                <Paginator currentPage={currentPage}
+                           onPageChanged={onPageChanged}
+                           pageSize={pageSize}
+                           totalItemsCount={totalUsersCount}
+                />
+            </div>
+            <div className={s.usersContainerItems}>
+                {
+                    users.map(u => <User key={u.id}
+                                         user={u}
+                                         follow={props.follow}
+                                         unfollow={props.unfollow}
+                                         followingInProgress={props.followingInProgress}/>)
+                }
+            </div>
         </div>
     )
 }

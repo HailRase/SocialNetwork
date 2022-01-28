@@ -1,33 +1,52 @@
-import React from "react";
-import s from "../../Users/Users.module.css";
+import React, {useEffect, useState} from "react";
+import s from './Paginator.module.css'
+
 
 type PaginatorPropsType = {
     pageSize: number
-    totalUsersCount: number
+    totalItemsCount: number
     currentPage: number
     onPageChanged: (p: number) => void
+    portionSize?: number
 }
 
 export const Paginator: React.FC<PaginatorPropsType> = ({
                                                             pageSize,
                                                             currentPage,
                                                             onPageChanged,
-                                                            totalUsersCount
+                                                            totalItemsCount,
+                                                            portionSize = 10
                                                         }) => {
-    
-    let pagesCount = Math.ceil(totalUsersCount / pageSize)
+
+    let pagesCount = Math.ceil(totalItemsCount / pageSize)
     let pagesArray = []
     for (let i = 1; i <= pagesCount; i++) {
         pagesArray.push(i)
     }
+    let portionCount = Math.ceil(pagesCount / portionSize)
+    const [portionNumber, setPortionNumber] = useState<number>(1)
+    let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
+    let rightPortionPageNumber = portionNumber * portionSize
+    useEffect(() => {
+        setPortionNumber(Math.ceil(currentPage / portionSize))
+    }, [currentPage])
 
     return (
-        <div>
-            {pagesArray.map(p => <span
-                style={{cursor: "pointer", margin: "5px 5px"}}
-                className={currentPage === p ? s.selectedPage : ''}
-                onClick={() => onPageChanged(p)}
-            >{p}</span>)}
+        <div className={s.mainPaginator}>
+            {portionNumber > 2 &&
+                <button className={s.arrow} onClick={()=> setPortionNumber(1)}>{"<<"}</button>}
+            {portionNumber > 1 &&
+                <button className={s.arrow} onClick={()=> setPortionNumber(portionNumber - 1)}>{"<"}</button>}
+            {pagesArray
+                .filter(p => p >= leftPortionPageNumber && p<= rightPortionPageNumber)
+                .map( p => {
+                    return <span className={s.paginatorItem} onClick={() => onPageChanged(p)}>{p} </span>
+                })}
+
+            {portionCount > portionNumber &&
+                <button className={s.arrow} onClick={ () => setPortionNumber(portionNumber + 1)}>{">"}</button>}
+            {(portionCount - portionNumber) > 2 &&
+                <button className={s.arrow} onClick={ () => setPortionNumber(portionCount)}>{">>"}</button>}
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Header.module.css';
 import {UserDataType} from "../../redux/auth-reducer";
+import CustomButton from "../common/CustomButton/CustomButton";
 
 type HeaderPropsType = {
     data: UserDataType | null
@@ -17,7 +18,7 @@ function Header(props: HeaderPropsType) {
                 alt=""/>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? <div>Hi, {props.data?.login} | <button onClick={props.logout}>Logout</button></div>
+                    ? <div>Hi, {props.data?.login} | <CustomButton purple onClick={props.logout}>Logout</CustomButton></div>
                     : <NavLink to='/login'>Login</NavLink>}
             </div>
         </header>

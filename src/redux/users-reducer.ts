@@ -49,7 +49,7 @@ type FollowUnfollowActionType = ReturnType<typeof followSuccess>
 
 let initialState: UsersType = {
     users: [],
-    pageSize: 5,
+    pageSize: 15,
     totalUsersCount: 0,
     currentPage: 8,
     isFetching: true,

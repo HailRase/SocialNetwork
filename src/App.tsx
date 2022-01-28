@@ -43,7 +43,7 @@ class App extends React.Component<AppPropsType> {
                            render={() => <ProfileContainer/>}
                     />
                     <Route path='/news' component={() => <News/>}/>
-                    <Route path='/users' component={() => <UsersContainer/>}/>
+                    <Route path='/users' component={() => <UsersContainer />}/>
                     <Route path='/login' component={() => <Login/>}/>
                 </div>
             </div>

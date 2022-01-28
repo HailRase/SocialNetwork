@@ -1,12 +1,15 @@
-.userPhoto {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+.usersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+.usersContainerItems{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
-.selectedPage {
-    margin-left: 2px;
-    margin-right: 2px;
-    font-size: 18px;
-    font-weight: bold;
-}

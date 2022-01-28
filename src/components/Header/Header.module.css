@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: black solid 3px;
 }
 
 .header img {
@@ -11,10 +12,27 @@
 }
 
 .loginBlock,
-.loginBlock a{
+.loginBlock a {
     margin-right: 10px;
-    font-size: 18px;
-    color: #7345c2;
+    font-size: 26px;
+    font-stretch: ultra-expanded;
+    color: #572e9b;
     font-family: Consolas;
     font-weight: bold;
+    text-shadow: -0 -1px 0 #000000,
+    0 -1px 0 #000000,
+    -0 1px 0 #000000,
+    0 1px 0 #000000,
+    -1px -0 0 #000000,
+    1px -0 0 #000000,
+    -1px 0 0 #000000,
+    1px 0 0 #000000,
+    -1px -1px 0 #000000,
+    1px -1px 0 #000000,
+    -1px 1px 0 #000000,
+    1px 1px 0 #000000,
+    -1px -1px 0 #000000,
+    1px -1px 0 #000000,
+    -1px 1px 0 #000000,
+    1px 1px 0 #000000;
 }

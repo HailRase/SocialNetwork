@@ -1,0 +1,57 @@
+.default{
+    color: #ecdc45;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Consolas;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.purple{
+    background-color: rgb(123, 67, 213);
+    color: #ecdc45;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Consolas;
+    border-radius: 5px;
+    cursor: pointer;
+    border: black solid 3px;
+    padding: 2px 5px 2px 5px;
+    text-shadow: -0   -3px 0   #000000,
+    0   -3px 0   #000000,
+    -0    3px 0   #000000,
+    0    3px 0   #000000,
+    -3px -0   0   #000000,
+    3px -0   0   #000000,
+    -3px  0   0   #000000,
+    3px  0   0   #000000,
+    -1px -3px 0   #000000,
+    1px -3px 0   #000000,
+    -1px  3px 0   #000000,
+    1px  3px 0   #000000,
+    -3px -1px 0   #000000,
+    3px -1px 0   #000000,
+    -3px  1px 0   #000000,
+    3px  1px 0   #000000,
+    -2px -3px 0   #000000,
+    2px -3px 0   #000000,
+    -2px  3px 0   #000000,
+    2px  3px 0   #000000,
+    -3px -2px 0   #000000,
+    3px -2px 0   #000000,
+    -3px  2px 0   #000000,
+    3px  2px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000;
+}
+.purple:active {
+    color: #7345c2;
+    background-color: #ecdc45;
+    opacity: 1;
+}

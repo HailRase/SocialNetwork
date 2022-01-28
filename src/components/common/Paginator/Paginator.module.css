@@ -1,0 +1,97 @@
+.mainPaginator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.paginatorItem {
+    font-size: 18px;
+    color: #ecdc45;
+    font-weight: bold;
+    margin: 0 3px 0 3px;
+    cursor: pointer;
+    text-shadow:-0   -3px 0   #000000,
+    0   -3px 0   #000000,
+    -0    3px 0   #000000,
+    0    3px 0   #000000,
+    -3px -0   0   #000000,
+    3px -0   0   #000000,
+    -3px  0   0   #000000,
+    3px  0   0   #000000,
+    -1px -3px 0   #000000,
+    1px -3px 0   #000000,
+    -1px  3px 0   #000000,
+    1px  3px 0   #000000,
+    -3px -1px 0   #000000,
+    3px -1px 0   #000000,
+    -3px  1px 0   #000000,
+    3px  1px 0   #000000,
+    -2px -3px 0   #000000,
+    2px -3px 0   #000000,
+    -2px  3px 0   #000000,
+    2px  3px 0   #000000,
+    -3px -2px 0   #000000,
+    3px -2px 0   #000000,
+    -3px  2px 0   #000000,
+    3px  2px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000;
+}
+
+.paginatorItem:active {
+    opacity: 0.5;
+}
+
+.arrow {
+    border: none;
+    color: #ecdc45;
+    font-weight: bold;
+    font-family: Consolas;
+    font-size: 18px;
+    background: none;
+    margin-bottom: 4px;
+    cursor: pointer;
+    text-shadow:-0   -3px 0   #000000,
+    0   -3px 0   #000000,
+    -0    3px 0   #000000,
+    0    3px 0   #000000,
+    -3px -0   0   #000000,
+    3px -0   0   #000000,
+    -3px  0   0   #000000,
+    3px  0   0   #000000,
+    -1px -3px 0   #000000,
+    1px -3px 0   #000000,
+    -1px  3px 0   #000000,
+    1px  3px 0   #000000,
+    -3px -1px 0   #000000,
+    3px -1px 0   #000000,
+    -3px  1px 0   #000000,
+    3px  1px 0   #000000,
+    -2px -3px 0   #000000,
+    2px -3px 0   #000000,
+    -2px  3px 0   #000000,
+    2px  3px 0   #000000,
+    -3px -2px 0   #000000,
+    3px -2px 0   #000000,
+    -3px  2px 0   #000000,
+    3px  2px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000;
+}
+
+.arrow:active {
+    opacity: 0.5;
+}

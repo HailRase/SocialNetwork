@@ -37,7 +37,7 @@ const instance = axios.default.create({
 
 
 export const usersAPI = {
-    getUsers(currentPage: number = 1, pageSize: number = 10) {
+    getUsers(currentPage: number = 1, pageSize: number = 20) {
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 return response.data
