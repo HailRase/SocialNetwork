@@ -1,8 +1,12 @@
-.item {
+.postContainer {
+    background-color: #7345c2;
     color: greenyellow;
+    margin-bottom: 10px;
+    border: 3px solid black;
+    border-radius: 5px;
 }
 
-.item img {
+.postContainer img {
     width: 50px;
     height: 50px;
     border-radius: 25px 25px 25px 25px;

@@ -1,0 +1,10 @@
+.addPostFormContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.addPostFormContainer .buttonPosition{
+    align-self: flex-end;
+}

@@ -7,6 +7,7 @@ import {createField, Input} from "../common/FormsControl/FormsControl";
 import {required} from "../../utils/validators/validators";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
+import CustomButton from "../common/CustomButton/CustomButton";
 
 type FormDataType = {
     email: string
@@ -34,7 +35,7 @@ const LoginForm = ({handleSubmit, error}: InjectedFormProps<FormDataType>) => {
                 error && <div style={{color: 'red'}}>{error}</div>
             }
             <div>
-                <button>Login</button>
+                <CustomButton purple>Login</CustomButton>
             </div>
         </form>
     );
@@ -55,9 +56,15 @@ const Login = (props: LoginPropsType) => {
     }
     if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
-        <div className={s.loginElementsPosition}>
-            <h1>LOGIN</h1>
-            <LoginReduxForm onSubmit={onSubmitHandler}/>
+        <div className={s.loginContainer}>
+            <div className={s.loginElementsPosition}>
+                <div>
+                    <h1 className={s.formName}>LOGIN</h1>
+                </div>
+                <div>
+                    <LoginReduxForm onSubmit={onSubmitHandler}/>
+                </div>
+            </div>
         </div>
     );
 };

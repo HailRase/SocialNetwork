@@ -19,7 +19,7 @@ function Header(props: HeaderPropsType) {
             <div className={s.loginBlock}>
                 {props.isAuth
                     ? <div>Hi, {props.data?.login} | <CustomButton purple onClick={props.logout}>Logout</CustomButton></div>
-                    : <NavLink to='/login'>Login</NavLink>}
+                    : <NavLink style={{textDecoration: "none"}} to='/login'>Login</NavLink>}
             </div>
         </header>
     );

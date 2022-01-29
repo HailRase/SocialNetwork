@@ -1,5 +1,22 @@
-.postsBlog {
+.postsBlock {
+    width: 60%;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ecdc45;
+    border: black solid 3px;
+    border-radius: 5px;
+}
+.postsBlock .nameContainer{
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: Consolas;
+    font-size: 26px;
+    margin-bottom: 10px;
+    align-self: center;
+    border: black solid 3px;
+    width: 100%;
+    text-align: center;
 }
 
 .posts {

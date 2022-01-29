@@ -8,7 +8,7 @@ type PostPropsType = {
 
 function Post(props: PostPropsType) {
     return (
-        <div className={s.item}>
+        <div className={s.postContainer}>
             <img src="https://www.kinonews.ru/insimgs/2018/newsimg/newsimg83415.jpg" alt=""/>
             {props.message}
             <div>

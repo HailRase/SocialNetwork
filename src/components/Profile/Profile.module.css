@@ -1,0 +1,28 @@
+.profileContainer {
+    height: 100%;
+    width: 100%;
+}
+.profileInfoContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 10px 0;
+}
+.profilePage {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.profilePageServices{
+    display: flex;
+    justify-content: space-around;
+}
+.friendsPage{
+    width: 25%;
+    max-height: 50%;
+    background-color: #ecdc45;
+    border: black 3px solid;
+    border-radius: 5px;
+    padding: 10px;
+}

@@ -11,7 +11,7 @@ type InputPropsType = DefaultInputPropsType & WrappedFieldProps
 type FormControlPropsType = InputPropsType & TextareaPropsType
 const FormControl: FC<FormControlPropsType> = ({
                                                    input,
-                                                   meta:{touched, error},
+                                                   meta: {touched, error},
                                                    children
                                                }) => {
     const showError = touched && error
@@ -24,10 +24,10 @@ const FormControl: FC<FormControlPropsType> = ({
     );
 }
 export const FormsControl: FC<TextareaPropsType> = ({
-                                                    input,
-                                                    meta,
-                                                    ...restProps
-                                                }) => {
+                                                        input,
+                                                        meta,
+                                                        ...restProps
+                                                    }) => {
     return (
         <FormControl input={input} meta={meta}>
             <textarea className={s.textarea} {...input} {...restProps}/>
@@ -47,13 +47,17 @@ export const Input: FC<InputPropsType> = ({
     );
 };
 
-export const createField = <T, C, P>(placeholder?: string, name?: string, validators?: T | Array<T>, component?: C, props?: P , text?: string )=> (
-    <div>
+export const createField = <T, C, P>(placeholder?: string, name?: string, validators?: T | Array<T>, component?: C, props?: P, text?: string) => (
+    <div style={{display: "flex"}}>
         <Field name={name}
                component={component}
                validate={validators}
                placeholder={placeholder}
                {...props}
-        />{text}
+            style={{marginBottom: "10px"}}
+        />
+        <div>
+            {text}
+        </div>
     </div>
 )

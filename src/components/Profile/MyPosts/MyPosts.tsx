@@ -14,9 +14,13 @@ const MyPosts = React.memo((props: MyPostsPropsType) => {
         postText.newPostText = ''
     }
     return (
-        <div className={s.postsBlog}>
-            <h3>My posts</h3>
-            <AddPostForm onSubmit={onSubmitAddPost}/>
+        <div className={s.postsBlock}>
+            <div className={s.nameContainer}>
+                <span>My posts</span>
+            </div>
+            <div>
+                <AddPostForm onSubmit={onSubmitAddPost}/>
+            </div>
             <div className={s.posts}>
                 {postsElement}
             </div>

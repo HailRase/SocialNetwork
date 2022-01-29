@@ -2,6 +2,8 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength, required} from "../../../utils/validators/validators";
 import {FormsControl} from "../../common/FormsControl/FormsControl";
+import CustomButton from "../../common/CustomButton/CustomButton";
+import s from './AddPostForm.module.css'
 
 export type AddPostFormType = {
     newPostText: string
@@ -9,14 +11,15 @@ export type AddPostFormType = {
 const maxLength15 = maxLength(15)
 const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form className={s.addPostFormContainer} onSubmit={props.handleSubmit}>
             <Field component={FormsControl}
                    label={'Create new post'}
                    name={'newPostText'}
                    placeholder={'Enter post text..'}
                    validate={[required, maxLength15]}
+                   style={{width: "100%"}}
             />
-            <button>Add post</button>
+            <CustomButton className={s.buttonPosition} purple>Add post</CustomButton>
         </form>
     );
 };
