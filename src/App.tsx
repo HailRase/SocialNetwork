@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import './App.css'
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
-import {BrowserRouter, Route, RouteComponentProps, withRouter} from 'react-router-dom';
+import {HashRouter, Route, RouteComponentProps, withRouter} from 'react-router-dom';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -62,11 +62,11 @@ let AppContainer = withRouter<RouteComponentProps, any>(connect(mapStateToProps,
 
 const SamuraiJSApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 
