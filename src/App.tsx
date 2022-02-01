@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css'
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import {BrowserRouter, Route, RouteComponentProps, withRouter} from 'react-router-dom';
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {store, StoreType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import {withSuspense} from "./hoc/withSuspense";
+const DialogsContainer = React.lazy(()=> import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(()=> import('./components/Profile/ProfileContainer'));
+const UsersContainer = React.lazy(()=> import('./components/Users/UsersContainer'));
+const Login = React.lazy(()=> import('./components/Login/Login'));
 
 
 type MapStateToPropsType = {
@@ -37,14 +38,15 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}
+
+                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}
                     />
                     <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer/>}
+                           render={() => <Suspense fallback={<Preloader/>}><ProfileContainer/></Suspense>}
                     />
                     <Route path='/news' component={() => <News/>}/>
-                    <Route path='/users' component={() => <UsersContainer />}/>
-                    <Route path='/login' component={() => <Login/>}/>
+                    <Route path='/users' component={withSuspense(UsersContainer)}/>
+                    <Route path='/login' component={withSuspense(Login)}/>
                 </div>
             </div>
 
