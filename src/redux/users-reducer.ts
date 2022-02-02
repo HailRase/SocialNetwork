@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {FollowResponseType, usersAPI} from "../api/api";
+import {ResponseType, usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objec-helpers";
 
 const FOLLOW = 'FOLLOW'
@@ -71,7 +71,7 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersType => 
                 //users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         case SET_USERS:
-            return {...state, users: [...action.users]}
+             return  {...state, users: [...action.users]}
         case SET_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage}
         case SET_TOTAL_USERS_COUNT:
@@ -146,7 +146,7 @@ export const requestUsers = (page: number, pageSize: number) => async (dispatch:
 export const followUnfollowFlow = async (
     dispatch: Dispatch,
     userId: number,
-    apiMethod: (userId: number) => Promise<FollowResponseType>,
+    apiMethod: (userId: number) => Promise<ResponseType<{}>>,
     actionCreator: (userId: number) => FollowUnfollowActionType) => {
 
     dispatch(setFollowingInProgress(true, userId))

@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
-const ADD_NEW_POST = 'ADD-NEW-POST'
-const DELETE_POST = 'DELETE-POST'
-const SET_USER_PROFILE = 'SET-USER-PROFILE'
-const SET_STATUS = 'SET-STATUS'
+const ADD_NEW_POST = 'profile/ADD-NEW-POST'
+const DELETE_POST = 'profile/DELETE-POST'
+const SET_USER_PROFILE = 'profile/SET-USER-PROFILE'
+const SET_STATUS = 'profile/SET-STATUS'
+const SAVE_PHOTO_SUCCESS = 'profile/SAVE-PHOTO-SUCCESS'
 
 
 export type UserProfilePhotosType = {
@@ -43,6 +44,7 @@ type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>
 
 let initialState: ProfilePageType = {
     posts: [
@@ -76,6 +78,12 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                //@ts-ignore
+                userProfile: {...state.userProfile, photos: action.photos}
+            }
         default:
             return state
     }
@@ -105,6 +113,7 @@ export const setStatus = (status: string) => {
         status
     } as const
 }
+export const savePhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 
 
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
@@ -119,6 +128,12 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     let data = await profileAPI.updateStatus(status)
     if (data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+export const savePhoto = (photo: any) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.savePhoto(photo)
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSuccess(data.data.photos))
     }
 }
 

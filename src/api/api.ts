@@ -8,20 +8,11 @@ type GetUsersResponseType = {
     totalCount: number
     error: string | null
 }
-export type FollowResponseType = {
-    resultCode: number
-    messages: Array<string>
-    data: object
-}
-type UpdateStatusResponseType = {
+
+export type ResponseType<D> = {
     resultCode: number
     messages: string[]
-    data: object
-}
-type AuthorizeLoginResponseType = {
-    resultCode: number
-    messages: string[]
-    data: object
+    data: D
 }
 
 
@@ -44,13 +35,13 @@ export const usersAPI = {
             })
     },
     unfollow(userId: number) {
-        return instance.delete<FollowResponseType>(`follow/${userId}`)
+        return instance.delete<ResponseType<{}>>(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
     follow(userId: number) {
-        return instance.post<FollowResponseType>(`follow/${userId}`)
+        return instance.post<ResponseType<{}>>(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
@@ -70,14 +61,24 @@ export const profileAPI = {
     getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
             .then(response => {
-            return response.data
-        })
+                return response.data
+            })
     },
     updateStatus(status: string) {
-        return instance.put<UpdateStatusResponseType>(`profile/status/`, {status})
+        return instance.put<ResponseType<{}>>(`profile/status/`, {status})
             .then(response => {
-            return response.data
+                return response.data
+            })
+    },
+    savePhoto(photoFile: any) {
+        const formData = new FormData()
+        formData.append("image", photoFile)
+        return instance.put<ResponseType<ProfileResponseType>>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type':'multipart/form-data'
+            }
         })
+            .then(response => response.data)
     }
 }
 
@@ -86,13 +87,13 @@ export const authAPI = {
         return instance.get(`auth/me`)
     },
     login(email: string, password: string, rememberMe: boolean, captcha?: boolean) {
-        return instance.post<AuthorizeLoginResponseType>(`auth/login`, {email, password, rememberMe, captcha})
+        return instance.post<ResponseType<{}>>(`auth/login`, {email, password, rememberMe, captcha})
             .then(response => {
                 return response.data
             })
     },
     logout() {
-        return instance.delete<AuthorizeLoginResponseType>(`auth/login`)
+        return instance.delete<ResponseType<{}>>(`auth/login`)
             .then(response => {
                 return response.data
             })

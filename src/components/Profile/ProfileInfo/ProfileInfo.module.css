@@ -10,18 +10,88 @@
 .profileImage {
     display: flex;
     justify-content: center;
+    background-color: #7345c2;
     align-items: center;
     flex-wrap: wrap;
-    border: black solid 3px;
-    width: 30%;
+    border: black solid 5px;
+    border-radius: 5px;
+    width: 25%;
     height: 100%;
+    margin: 10px 10px 10px 15px;
 }
-.profileImage img{
-    width: 100%;
+
+.profileInformation {
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 64.5%;
+    margin: 10px 10px 10px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
-.noAvatar {
-    width: 50%;
-    height: 50%;
-    background-color: #7345c2;
+
+.avatar {
+    margin: 10px;
+    width: 95%;
     color: #ecdc45;
+    border-radius: 5px;
+}
+
+.imageDownloader{
+    margin-bottom: 10px;
+    background-color: #ecdc45 ;
+    color: rgb(123, 67, 213);
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Consolas;
+    border-radius: 5px;
+    cursor: pointer;
+    border: black solid 3px;
+    padding: 2px 5px 2px 5px;
+    text-shadow: -0   -3px 0   #000000,
+    0   -3px 0   #000000,
+    -0    3px 0   #000000,
+    0    3px 0   #000000,
+    -3px -0   0   #000000,
+    3px -0   0   #000000,
+    -3px  0   0   #000000,
+    3px  0   0   #000000,
+    -1px -3px 0   #000000,
+    1px -3px 0   #000000,
+    -1px  3px 0   #000000,
+    1px  3px 0   #000000,
+    -3px -1px 0   #000000,
+    3px -1px 0   #000000,
+    -3px  1px 0   #000000,
+    3px  1px 0   #000000,
+    -2px -3px 0   #000000,
+    2px -3px 0   #000000,
+    -2px  3px 0   #000000,
+    2px  3px 0   #000000,
+    -3px -2px 0   #000000,
+    3px -2px 0   #000000,
+    -3px  2px 0   #000000,
+    3px  2px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000,
+    -3px -3px 0   #000000,
+    3px -3px 0   #000000,
+    -3px  3px 0   #000000,
+    3px  3px 0   #000000;
+}
+.imageDownloader:active {
+    color: #ecdc45;
+    background-color: rgb(123, 67, 213);
+    opacity: 1;
+}
+
+.informationItem {
+    margin-top: 5px;
+    width: 95%;
+    text-align: center;
+    border-radius: 5px;
+    border: 3px solid black;
 }
