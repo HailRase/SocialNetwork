@@ -40,7 +40,7 @@ export const initializeApp = (): ThunkType => (dispatch) => {
 }
 
 
-export type ThunkType = ThunkAction<void, StoreType, unknown, CommonActionType>
+type ThunkType = ThunkAction<void, StoreType, unknown, CommonActionType>
 type CommonActionType = ActionsTypes
 
 export default appReducer

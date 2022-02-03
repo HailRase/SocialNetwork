@@ -1,0 +1,9 @@
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.contact img:hover {
+    opacity: 0.5;
+}

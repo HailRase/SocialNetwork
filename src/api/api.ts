@@ -79,7 +79,11 @@ export const profileAPI = {
             }
         })
             .then(response => response.data)
-    }
+    },
+    saveProfile(profile: any) {
+        return instance.put<ResponseType<ProfileResponseType>>(`profile`, profile)
+            .then(response => response.data)
+    },
 }
 
 export const authAPI = {

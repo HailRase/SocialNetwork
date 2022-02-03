@@ -1,0 +1,46 @@
+.profileDataFormControlContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileDataFormControlItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.profileDataFormControlItem textarea{
+    width: 100%;
+}
+.contactsContainer{
+    border: 3px solid black;
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contactsItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.contactsItem{
+    text-align: center;
+    margin-left: 10px;
+}
+.buttonPosition {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

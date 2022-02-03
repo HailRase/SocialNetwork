@@ -10,6 +10,7 @@ type ProfilePropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto: (photo: any) => void
+    saveProfile: (profile: any) => void
 }
 
 function Profile(props: ProfilePropsType) {
@@ -24,6 +25,7 @@ function Profile(props: ProfilePropsType) {
                                  isOwner={props.isOwner}
                                  status={props.status}
                                  savePhoto={props.savePhoto}
+                                 saveProfile={props.saveProfile}
                                  updateStatus={props.updateStatus}/>
                 </div>
                 <div className={s.profilePageServices}>
