@@ -26,10 +26,14 @@
     align-items: center;
 }
 .contactsItems {
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .buttonPosition {
-
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
