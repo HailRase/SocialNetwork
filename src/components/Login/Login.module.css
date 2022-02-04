@@ -48,3 +48,13 @@
     -1px 1px 0 #000000,
     1px 1px 0 #000000;
 }
+.captchaBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.captchaBlock img{
+    width: 20vh;
+    height: 10vh;
+}

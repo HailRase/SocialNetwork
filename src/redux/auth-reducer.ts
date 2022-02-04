@@ -1,13 +1,13 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./redux-store";
 import {stopSubmit} from "redux-form";
-import {batch} from "react-redux";
 
-const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
-const SET_FETCHING = 'SET-FETCHING'
-const SET_USER_AUTHORIZATION = 'SET-USER-AUTHORIZATION'
+const SET_AUTH_USER_DATA = 'auth/SET-AUTH-USER-DATA'
+const SET_FETCHING = 'auth/SET-FETCHING'
+const SET_USER_AUTHORIZATION = 'auth/SET-USER-AUTHORIZATION'
+const SET_CAPTCHA_URL = 'auth/SET-CAPTCHA-URL'
 
 
 export type UserDataType = {
@@ -19,18 +19,21 @@ export type AuthUserDataType = {
     data: UserDataType | null
     isFetching: boolean
     isAuth: boolean
+    captcha: string | null
 }
 
 type ActionsTypes = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setUserAuthorization>
+    | ReturnType<typeof setCaptchaURL>
 
 type StopSubmitType = ReturnType<typeof stopSubmit>
 
 let initialState: AuthUserDataType = {
     data: null,
     isFetching: true,
-    isAuth: false
+    isAuth: false,
+    captcha: null
 }
 
 const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataType => {
@@ -51,52 +54,51 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataTy
                 ...state,
                 isAuth: action.isAuth
             }
+        case SET_CAPTCHA_URL:
+            return {
+                ...state,
+                captcha: action.captcha
+            }
         default:
             return state
     }
 }
 
-export const setAuthUserData = (data: UserDataType | null) => {
-    return {
-        type: SET_AUTH_USER_DATA,
-        data
-    } as const
-}
-export const setFetching = (isFetching: boolean) => {
-    return {
-        type: SET_FETCHING,
-        isFetching
-    } as const
-}
-export const setUserAuthorization = (isAuth: boolean) => {
-    return {
-        type: SET_USER_AUTHORIZATION,
-        isAuth
-    } as const
-}
+export const setAuthUserData = (data: UserDataType | null) => ({type: SET_AUTH_USER_DATA, data} as const)
+export const setFetching = (isFetching: boolean) => ({type: SET_FETCHING, isFetching} as const)
+export const setUserAuthorization = (isAuth: boolean) => ({type: SET_USER_AUTHORIZATION, isAuth} as const)
+export const setCaptchaURL = (captcha: string | null) => ({type: SET_CAPTCHA_URL, captcha} as const)
+
 
 export const getAuthUserData = () => async (dispatch: Dispatch) => {
-    let response = await authAPI.me()
+    const response = await authAPI.me()
     if (response.data.resultCode === 0) {
         dispatch(setAuthUserData(response.data.data))
     }
 }
-export const login = (email: string, password: string, rememberMe: boolean, captcha?: boolean): ThunkType => async (dispatch) => {
-    let data = await authAPI.login(email, password, rememberMe, captcha)
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType => async (dispatch) => {
+    const data = await authAPI.login(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
-        dispatch(getAuthUserData())
+        await dispatch(getAuthUserData())
+        dispatch(setCaptchaURL(null))
     } else {
+        if (data.resultCode === 10) {
+            dispatch(getCaptcha())
+        }
         dispatch(stopSubmit('login', {_error: data.messages}))
     }
 }
 export const logout = (): ThunkType => async (dispatch) => {
-    let data = await authAPI.logout()
+    const data = await authAPI.logout()
     if (data.resultCode === 0) {
         dispatch(setAuthUserData(null))
     }
     dispatch(setUserAuthorization(false))
 }
-
+export const getCaptcha = (): ThunkType => async (dispatch) => {
+    const captchaURL = await securityAPI.getCaptchaURL()
+    dispatch(setCaptchaURL(captchaURL.url))
+}
 
 export type ThunkType = ThunkAction<void, StoreType, unknown, CommonActionType>
 type CommonActionType = ActionsTypes | StopSubmitType
