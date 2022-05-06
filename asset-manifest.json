@@ -3,10 +3,10 @@
     "static/js/0.b6259b5b.chunk.js": "/social-network/static/js/0.b6259b5b.chunk.js",
     "static/js/0.b6259b5b.chunk.js.map": "/social-network/static/js/0.b6259b5b.chunk.js.map",
     "main.css": "/social-network/static/css/main.f9182b24.chunk.css",
-    "main.js": "/social-network/static/js/main.b33ff01f.chunk.js",
-    "main.js.map": "/social-network/static/js/main.b33ff01f.chunk.js.map",
-    "runtime-main.js": "/social-network/static/js/runtime-main.65a29207.js",
-    "runtime-main.js.map": "/social-network/static/js/runtime-main.65a29207.js.map",
+    "main.js": "/social-network/static/js/main.3b144a31.chunk.js",
+    "main.js.map": "/social-network/static/js/main.3b144a31.chunk.js.map",
+    "runtime-main.js": "/social-network/static/js/runtime-main.9f1487c3.js",
+    "runtime-main.js.map": "/social-network/static/js/runtime-main.9f1487c3.js.map",
     "static/js/3.ed680e04.chunk.js": "/social-network/static/js/3.ed680e04.chunk.js",
     "static/js/3.ed680e04.chunk.js.map": "/social-network/static/js/3.ed680e04.chunk.js.map",
     "static/css/4.5a612f84.chunk.css": "/social-network/static/css/4.5a612f84.chunk.css",
@@ -19,8 +19,8 @@
     "static/js/6.05e8f6ad.chunk.js": "/social-network/static/js/6.05e8f6ad.chunk.js",
     "static/js/6.05e8f6ad.chunk.js.map": "/social-network/static/js/6.05e8f6ad.chunk.js.map",
     "static/css/7.c4f4fe93.chunk.css": "/social-network/static/css/7.c4f4fe93.chunk.css",
-    "static/js/7.45ce6a02.chunk.js": "/social-network/static/js/7.45ce6a02.chunk.js",
-    "static/js/7.45ce6a02.chunk.js.map": "/social-network/static/js/7.45ce6a02.chunk.js.map",
+    "static/js/7.02ca8d4f.chunk.js": "/social-network/static/js/7.02ca8d4f.chunk.js",
+    "static/js/7.02ca8d4f.chunk.js.map": "/social-network/static/js/7.02ca8d4f.chunk.js.map",
     "static/js/8.1d9a4625.chunk.js": "/social-network/static/js/8.1d9a4625.chunk.js",
     "static/js/8.1d9a4625.chunk.js.map": "/social-network/static/js/8.1d9a4625.chunk.js.map",
     "index.html": "/social-network/index.html",
@@ -40,9 +40,9 @@
     "static/media/youtube.53e70a78.png": "/social-network/static/media/youtube.53e70a78.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.65a29207.js",
+    "static/js/runtime-main.9f1487c3.js",
     "static/js/3.ed680e04.chunk.js",
     "static/css/main.f9182b24.chunk.css",
-    "static/js/main.b33ff01f.chunk.js"
+    "static/js/main.3b144a31.chunk.js"
   ]
 }
