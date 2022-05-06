@@ -15,12 +15,12 @@ export type UserDataType = {
     email: string
     login: string
 }
-export type AuthUserDataType = {
+/*export type AuthUserDataType2 = {
     data: UserDataType | null
     isFetching: boolean
     isAuth: boolean
     captcha: string | null
-}
+}*/
 
 type ActionsTypes = ReturnType<typeof setAuthUserData>
     | ReturnType<typeof setFetching>
@@ -29,12 +29,14 @@ type ActionsTypes = ReturnType<typeof setAuthUserData>
 
 type StopSubmitType = ReturnType<typeof stopSubmit>
 
-let initialState: AuthUserDataType = {
-    data: null,
-    isFetching: true,
-    isAuth: false,
-    captcha: null
+let initialState = {
+    data: null as UserDataType | null,
+    isFetching: true as boolean,
+    isAuth: false as boolean,
+    captcha: null as string | null
 }
+export type AuthUserDataType = typeof initialState
+
 
 const authReducer = (state = initialState, action: ActionsTypes): AuthUserDataType => {
     switch (action.type) {

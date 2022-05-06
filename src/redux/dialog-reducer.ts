@@ -28,6 +28,7 @@ let initialState: IDialogPageType = {
         {id: 2, name: 'Yura'},
         {id: 3, name: 'Sveta'},
         {id: 4, name: 'Sasha'}
+
     ],
     messages: [
         {id: 1, text: 'Hi'},
@@ -35,7 +36,6 @@ let initialState: IDialogPageType = {
         {id: 3, text: 'How is your it-kamasutra?'}
     ]
 }
-
 const dialogReducer = (state = initialState, action: ActionsTypes): IDialogPageType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:

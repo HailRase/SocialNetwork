@@ -72,6 +72,10 @@ const Login = (props: LoginPropsType) => {
                 <div>
                     <h1 className={s.formName}>LOGIN</h1>
                 </div>
+                <div style={{marginBottom: "10px"}}>
+                    <span style={{display: "block"}}>login: free@samuraijs.com</span>
+                    <span style={{display: "block"}}>password: free</span>
+                </div>
                 <div>
                     <LoginReduxForm onSubmit={onSubmitHandler} {...props} />
                 </div>

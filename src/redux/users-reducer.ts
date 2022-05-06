@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {ResponseType, usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objec-helpers";
+import {PhotosType} from "./profile-reducer";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -11,10 +12,6 @@ const SET_FETCHING = 'SET-FETCHING'
 const SET_FOLLOWING_IN_PROGRESS = 'SET-FOLLOWING-IN-PROGRESS'
 
 
-export type PhotosType = {
-    small: string
-    large: string
-}
 export type LocationType = {
     country: string
     city: string
